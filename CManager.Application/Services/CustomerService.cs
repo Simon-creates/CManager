@@ -1,25 +1,15 @@
 ﻿using CManager.Domain.Models;
 using CManager.Infrastructure.Repos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CManager.Application.Services;
 
-public class CustomerService : ICustomerService
+public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
 {
 
-    private readonly ICustomerRepo _customerRepo;
-
-    public CustomerService(ICustomerRepo customerRepo)
-    {
-        _customerRepo = customerRepo;
-    }
+    private readonly ICustomerRepo _customerRepo = customerRepo;
 
     public bool CreateCustomer(string firstName, string lastName, string email, string phoneNumber, string streetAddress, string postalCode, string city)
     {
-
-        
         CustomerModel customerModel = new()
         {
             Id = Guid.NewGuid(),
@@ -46,33 +36,44 @@ public class CustomerService : ICustomerService
         {
             return false;
         }
-
-      
-
     }
-
-
-
 
     public IEnumerable<CustomerModel> GetAllCustomers(out bool hasError)
     {
         hasError = false;
-
         try
         {
-           var customers =  _customerRepo.GetAllCustomers();
-           return customers;
+            var customers = _customerRepo.GetAllCustomers();
+            return customers;
         }
         catch (Exception)
         {
-           
             hasError = true;
             return [];
-           
         }
-     
-        
-
-        
     }
+
+
+    public bool DeleteCustomer(Guid id)
+    {
+        try
+        {
+            var customers = _customerRepo.GetAllCustomers();
+            var customer = customers.FirstOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return false;
+
+            customers.Remove(customer);
+            var result = _customerRepo.SaveCustomers(customers);
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting customer: {ex.Message}");
+            return false;
+        }
+    }
+
 }
