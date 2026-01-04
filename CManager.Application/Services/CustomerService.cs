@@ -19,8 +19,7 @@ public class CustomerService : ICustomerService
     public bool CreateCustomer(string firstName, string lastName, string email, string phoneNumber, string streetAddress, string postalCode, string city)
     {
 
-        //validering isnullorempty(firstNAme) 
-
+        
         CustomerModel customerModel = new()
         {
             Id = Guid.NewGuid(),
@@ -66,7 +65,7 @@ public class CustomerService : ICustomerService
         }
         catch (Exception)
         {
-            // här kommer throw hamna från customerrepo - getallcustomers
+           
             hasError = true;
             return [];
            
