@@ -23,6 +23,7 @@ public class MenuController
             Console.WriteLine("Customer Manager");
             Console.WriteLine("1. Create Customer");
             Console.WriteLine("2. View All Customers");
+            Console.WriteLine("3. View Specific Customer");
             Console.WriteLine("0. Exit");
             Console.Write("Choose option: ");
 
@@ -37,6 +38,10 @@ public class MenuController
 
                 case "2":
                     ViewAllCustomers();
+                    break;
+
+                case "3":
+                    ViewSpecificCustomer();
                     break;
 
                 case "0":
@@ -123,6 +128,42 @@ public class MenuController
         }
 
         OutputDialog("Press any key to continue...");
+    }
+
+    private void ViewSpecificCustomer()
+
+    {      
+                
+        Console.Clear();
+        Console.WriteLine("View Specific Customer");
+        Console.Write("Enter Customer ID: ");
+        var input = Console.ReadLine()!;
+                
+        if (!Guid.TryParse(input, out Guid customerId))
+        {
+            OutputDialog("Invalid Customer ID format. Press any key to continue...");
+            return;
+        }
+        var customer = _customerService.GetCustomerById(customerId, out bool hasError);
+        if (hasError)
+        {
+            OutputDialog("Something went wrong. Please try again later");
+            return;
+        }
+        if (customer == null)
+        {
+            OutputDialog("Customer not found. Press any key to continue...");
+            return;
+        }
+        /*Console.WriteLine($"Name: {customer.FirstName} {customer.LastName}");
+        Console.WriteLine($"Email: {customer.Email}");
+        Console.WriteLine($"Phone: {customer.PhoneNumber}");
+        Console.WriteLine($"Address: {customer.Address.StreetAddress} {customer.Address.PostalCode} {customer.Address.City}");
+        Console.WriteLine($"ID: {customer.Id}");
+        */
+
+        OutputDialog("Press any key to continue..."); 
+        
     }
 
 

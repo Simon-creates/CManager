@@ -53,7 +53,20 @@ public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
         }
     }
 
-
+    public bool GetCustomerById(Guid id, out CustomerModel? customer)
+    {
+        customer = null;
+        try
+        {
+            var customers = _customerRepo.GetAllCustomers();
+            customer = customers.FirstOrDefault(c => c.Id == id);
+            return customer != null;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
     public bool DeleteCustomer(Guid id)
     {
         try
