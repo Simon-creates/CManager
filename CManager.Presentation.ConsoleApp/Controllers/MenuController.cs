@@ -124,9 +124,7 @@ public class MenuController
             foreach (var customer in customers)
             {
                 Console.WriteLine($"Name: {customer.FirstName} {customer.LastName}");
-                Console.WriteLine($"Email: {customer.Email}");
-                Console.WriteLine($"Phone: {customer.PhoneNumber}");
-                Console.WriteLine($"Address: {customer.Address.StreetAddress} {customer.Address.PostalCode} {customer.Address.City}");
+                Console.WriteLine($"Email: {customer.Email}");                
                 Console.WriteLine($"ID: {customer.Id}");
                 Console.WriteLine();
             }
@@ -172,14 +170,15 @@ public class MenuController
     }
 
     private void DeleteSpecificCustomer()
+        //fortsätt ändringar för att ta bort kund mha email och inte Id
     {
         Console.Clear();
         Console.WriteLine("Delete Specific Customer");
-        Console.Write("Enter Customer ID: ");
+        Console.Write("Enter Customer Email: ");
         var input = Console.ReadLine()!;
         if (!Guid.TryParse(input, out Guid customerId))
         {
-            OutputDialog("Invalid Customer ID format. Press any key to continue...");
+            OutputDialog("Invalid Customer Email format. Press any key to continue...");
             return;
         }
         var result = _customerService.DeleteCustomerById(customerId);
