@@ -144,23 +144,23 @@ public class MenuController
             OutputDialog("Invalid Customer ID format. Press any key to continue...");
             return;
         }
-        var customer = _customerService.GetCustomerById(customerId, out bool hasError);
-        if (hasError)
-        {
-            OutputDialog("Something went wrong. Please try again later");
-            return;
-        }
-        if (customer == null)
+        
+        bool found = _customerService.GetCustomerById(customerId, out var customer);
+
+        if (!found)       
+        
         {
             OutputDialog("Customer not found. Press any key to continue...");
             return;
         }
-        /*Console.WriteLine($"Name: {customer.FirstName} {customer.LastName}");
+        if (found)
+
+        Console.WriteLine($"Name: {customer.FirstName} {customer.LastName}");
         Console.WriteLine($"Email: {customer.Email}");
         Console.WriteLine($"Phone: {customer.PhoneNumber}");
         Console.WriteLine($"Address: {customer.Address.StreetAddress} {customer.Address.PostalCode} {customer.Address.City}");
         Console.WriteLine($"ID: {customer.Id}");
-        */
+        
 
         OutputDialog("Press any key to continue..."); 
         
