@@ -12,4 +12,6 @@ public interface ICustomerService
     IEnumerable<CustomerModel> GetAllCustomers(out bool hasError);
 
     bool GetCustomerById(Guid id, out CustomerModel? customer);
+
+    bool DeleteCustomerById(Guid id);
 }

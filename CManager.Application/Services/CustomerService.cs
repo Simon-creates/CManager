@@ -67,7 +67,7 @@ public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
             return false;
         }
     }
-    public bool DeleteCustomer(Guid id)
+    public bool DeleteCustomerById(Guid id)
     {
         try
         {

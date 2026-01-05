@@ -24,6 +24,7 @@ public class MenuController
             Console.WriteLine("1. Create Customer");
             Console.WriteLine("2. View All Customers");
             Console.WriteLine("3. View Specific Customer");
+            Console.WriteLine("4. Delete Spcecific Customer");
             Console.WriteLine("0. Exit");
             Console.Write("Choose option: ");
 
@@ -42,6 +43,10 @@ public class MenuController
 
                 case "3":
                     ViewSpecificCustomer();
+                    break;
+
+                case "4":
+                    DeleteSpecificCustomer();
                     break;
 
                 case "0":
@@ -166,6 +171,27 @@ public class MenuController
         
     }
 
+    private void DeleteSpecificCustomer()
+    {
+        Console.Clear();
+        Console.WriteLine("Delete Specific Customer");
+        Console.Write("Enter Customer ID: ");
+        var input = Console.ReadLine()!;
+        if (!Guid.TryParse(input, out Guid customerId))
+        {
+            OutputDialog("Invalid Customer ID format. Press any key to continue...");
+            return;
+        }
+        var result = _customerService.DeleteCustomerById(customerId);
+        if (result)
+        {
+            OutputDialog("Customer deleted successfully. Press any key to continue...");
+        }
+        else
+        {
+            OutputDialog("Customer not found. Press any key to continue...");
+        }
+    }
 
     private void OutputDialog(string message)
     {
