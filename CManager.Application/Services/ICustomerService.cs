@@ -1,6 +1,7 @@
 ﻿using CManager.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace CManager.Application.Services;
@@ -13,5 +14,6 @@ public interface ICustomerService
 
     bool GetCustomerById(Guid id, out CustomerModel? customer);
 
-    bool DeleteCustomerById(Guid id);
+    bool DeleteCustomerByEmail(string email);
+
 }

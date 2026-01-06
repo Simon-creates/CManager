@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net.Mail;
+
 
 namespace CManager.Presentation.ConsoleApp.Controllers;
 
@@ -169,19 +171,19 @@ public class MenuController
         
     }
 
-    private void DeleteSpecificCustomer()
-        //fortsätt ändringar för att ta bort kund mha email och inte Id
+    private void DeleteSpecificCustomer()        
     {
         Console.Clear();
         Console.WriteLine("Delete Specific Customer");
         Console.Write("Enter Customer Email: ");
         var input = Console.ReadLine()!;
-        if (!Guid.TryParse(input, out Guid customerId))
+
+        if (!MailAddress.TryCreate(input, out var _))
         {
             OutputDialog("Invalid Customer Email format. Press any key to continue...");
             return;
         }
-        var result = _customerService.DeleteCustomerById(customerId);
+        var result = _customerService.DeleteCustomerByEmail(input);
         if (result)
         {
             OutputDialog("Customer deleted successfully. Press any key to continue...");

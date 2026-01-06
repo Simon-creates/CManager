@@ -67,19 +67,19 @@ public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
             return false;
         }
     }
-    public bool DeleteCustomerById(Guid id)
+
+    public bool DeleteCustomerByEmail(string email)
     {
         try
         {
             var customers = _customerRepo.GetAllCustomers();
-            var customer = customers.FirstOrDefault(c => c.Id == id);
+            var customer = customers.FirstOrDefault(c => c.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
 
             if (customer == null)
                 return false;
 
             customers.Remove(customer);
-            var result = _customerRepo.SaveCustomers(customers);
-            return result;
+            return _customerRepo.SaveCustomers(customers);
 
         }
         catch (Exception ex)
