@@ -4,6 +4,7 @@ using System.Text;
 
 namespace CManager.Domain.Models;
 
+// model to hold address information
 public class AddressModel
 {
     public string StreetAddress { get; set; } = null!;

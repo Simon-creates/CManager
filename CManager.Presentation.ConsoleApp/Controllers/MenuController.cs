@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Mail;
 
-
 namespace CManager.Presentation.ConsoleApp.Controllers;
 
 public class MenuController
 {
+    // Dependency Injection of CustomerService
     private readonly ICustomerService _customerService;
 
+    // Constructor
     public MenuController(ICustomerService customerService)
     {
         _customerService = customerService;
     }
 
+    // Show Menu method + Menu switch
     public void ShowMenu()
     {
 
@@ -62,6 +64,7 @@ public class MenuController
 
     }
 
+    // Create Customer method + result
     private void CreateCustomer()
     {
         Console.Clear();
@@ -104,7 +107,7 @@ public class MenuController
 
     }
 
-
+    // View All Customers method + result
     private void ViewAllCustomers()
     {
         Console.Clear();
@@ -135,6 +138,7 @@ public class MenuController
         OutputDialog("Press any key to continue...");
     }
 
+    // View Specific Customer By Id method + result
     private void ViewSpecificCustomer()
 
     {      
@@ -171,6 +175,7 @@ public class MenuController
         
     }
 
+    // Delete Specific Customer By Email method + result
     private void DeleteSpecificCustomer()        
     {
         Console.Clear();
@@ -194,6 +199,7 @@ public class MenuController
         }
     }
 
+    // Output Dialog method
     private void OutputDialog(string message)
     {
         Console.WriteLine(message);

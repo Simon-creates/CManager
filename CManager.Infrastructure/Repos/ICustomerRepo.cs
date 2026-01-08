@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CManager.Infrastructure.Repos;
 
+// Interface for customer repository
 public interface ICustomerRepo
 {
     List<CustomerModel> GetAllCustomers();

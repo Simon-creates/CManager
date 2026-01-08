@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CManager.Domain.Models;
 
+// model to hold customer information
 public class CustomerModel
 {
     public Guid Id { get; set; }

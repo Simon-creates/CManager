@@ -3,11 +3,13 @@ using CManager.Infrastructure.Repos;
 
 namespace CManager.Application.Services;
 
+// implementation of customer service interface
 public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
 {
 
     private readonly ICustomerRepo _customerRepo = customerRepo;
 
+    // method for creating customer including creating Id
     public bool CreateCustomer(string firstName, string lastName, string email, string phoneNumber, string streetAddress, string postalCode, string city)
     {
         CustomerModel customerModel = new()
@@ -38,6 +40,7 @@ public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
         }
     }
 
+    // method for getting all customers
     public IEnumerable<CustomerModel> GetAllCustomers(out bool hasError)
     {
         hasError = false;
@@ -53,6 +56,7 @@ public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
         }
     }
 
+    // method for getting customer by Id
     public bool GetCustomerById(Guid id, out CustomerModel? customer)
     {
         customer = null;
@@ -68,6 +72,7 @@ public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
         }
     }
 
+    // method for deleting customer by email
     public bool DeleteCustomerByEmail(string email)
     {
         try
@@ -82,9 +87,8 @@ public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
             return _customerRepo.SaveCustomers(customers);
 
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error deleting customer: {ex.Message}");
+        catch (Exception)       
+        {            
             return false;
         }
     }

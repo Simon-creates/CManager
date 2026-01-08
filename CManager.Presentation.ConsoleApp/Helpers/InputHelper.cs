@@ -2,6 +2,7 @@
 
 namespace CManager.Presentation.ConsoleApp.Helpers;
 
+// Validation types for user input
 public enum ValidationType
 {
     Required,
@@ -10,7 +11,7 @@ public enum ValidationType
 
 public static class InputHelper
 {
-
+    // validates input from user
     public static string ValidateInput(string fieldName, ValidationType validationType)
     {
         while (true)
@@ -37,7 +38,7 @@ public static class InputHelper
     }
 
 
-
+    // validates input data based on specified validation type
     private static (bool isValid, string errorMessage) ValidateType(string input, ValidationType type)
     {
         switch (type)
@@ -53,7 +54,7 @@ public static class InputHelper
                 }
                 else
                 {
-                    return (false, "Inavlid email. Use name@example.com ");
+                    return (false, "Invalid email. Use name@example.com ");
                 }
 
             default:
@@ -62,7 +63,7 @@ public static class InputHelper
 
     }
 
-
+    // validates email format
     private static bool IsValidEmail(string input)
     {
         var pattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";

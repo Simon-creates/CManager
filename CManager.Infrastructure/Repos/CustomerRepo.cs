@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
+
 namespace CManager.Infrastructure.Repos;
 
+// implementation of customer repository
 public class CustomerRepo : ICustomerRepo
 {
+    // file path for storing customer data
     private readonly string _filePath;
     private readonly string _directoryPath;
     private readonly JsonSerializerOptions _jsonOptions;
@@ -26,7 +29,7 @@ public class CustomerRepo : ICustomerRepo
 
 
 
-
+    // gets all customers from the .json data file
     public List<CustomerModel> GetAllCustomers()
     {
         if (!File.Exists(_filePath))
@@ -46,10 +49,9 @@ public class CustomerRepo : ICustomerRepo
             Console.WriteLine($"Error loading customers: {ex.Message}");
             throw;
         }
-
-
     }
 
+    // saves the list of customers to the .json data file
     public bool SaveCustomers(List<CustomerModel> customers)
     {
         if (customers == null)
