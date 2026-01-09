@@ -3,13 +3,13 @@ using CManager.Infrastructure.Repos;
 
 namespace CManager.Application.Services;
 
-// implementation of customer service interface
+// implementation of customer service interface that contains business logic for creating and managing customers
 public class CustomerService(ICustomerRepo customerRepo) : ICustomerService
 {
 
     private readonly ICustomerRepo _customerRepo = customerRepo;
 
-    // method for creating customer including creating Id
+    // method for creating customer with Id generated in CustomerModel
     public bool CreateCustomer(string firstName, string lastName, string email, string phoneNumber, string streetAddress, string postalCode, string city)
     {
         CustomerModel customerModel = new()

@@ -7,7 +7,8 @@ using System.Text.Json;
 
 namespace CManager.Infrastructure.Repos;
 
-// implementation of customer repository
+// implementation of customer repository that handles data
+// for customers using a .json file
 public class CustomerRepo : ICustomerRepo
 {
     // file path for storing customer data
